@@ -1,0 +1,94 @@
+<!-- CADA PRODUTO POSSUI: TITULO, DESCRIÇÃO, PREÇO, MARCA, CATEGORIA E FOTOS -->
+<!-- A PAGINA DEVE LISTAR OS PRODUTOS E PERMITIR ADICIONAR E REMOVER -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produtos</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Lista de Produtos</h1>
+      <nav>
+        <a href="../index.html">Início</a>
+        <a href="../users/users.html">Usuários</a>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2>Adicionar Produto</h2>
+
+        <div class="form-container">
+          <form id="add-product-form">
+            
+            <div class="form-group">
+              <label for="titulo">Título</label>
+              <input type="text" id="titulo" placeholder="Digite o título" />
+              <span class="error-msg" id="err-titulo"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="marca">Marca</label>
+              <input type="text" id="marca" placeholder="Digite a marca" />
+              <span class="error-msg" id="err-marca"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Categoria</label>
+              <input
+                type="text"
+                id="categoria"
+                placeholder="Digite a categoria"
+              />
+              <span class="error-msg" id="err-categoria"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="preco">Preço</label>
+              <input type="number" id="preco" placeholder="Digite o preço" />
+              <span class="error-msg" id="err-preco"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <textarea
+                id="descricao"
+                placeholder="Digite a descrição"
+              ></textarea>
+              <span class="error-msg" id="err-descricao"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="thumbnail">URL da Foto (opcional)</label>
+              <input
+                type="text"
+                id="thumbnail"
+                placeholder="Digite uma URL válida"
+              />
+              <span class="error-msg" id="err-thumbnail"></span>
+            </div>
+
+            <button type="submit">Adicionar Produto</button>
+          </form>
+        </div>
+      </section>
+
+      <section>
+        <h2>Produtos Disponíveis</h2>
+        <div id="product-list" class="cards"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Projeto Front-End — API DummyJSON</p>
+    </footer>
+
+    <script src="/main.js"></script>
+    <script src="products.js"></script>
+  </body>
+</html>
