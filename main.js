@@ -15,7 +15,8 @@ function validateEmail(email) {
 
 // número > 0 e < 120 (idade e preço limitado neste projeto)
 function validateNumber(num) {
-    return typeof num === "number" && !isNaN(num) && num > 0 && num < 1000000;
+    return num > 0 && num < 120;
+    
 }
 
 // URL válida (opcional)
@@ -89,4 +90,5 @@ function updateToggleButton() {
 document.addEventListener('DOMContentLoaded', () => {
     applyThemeFromStorage();
 });
+
 
