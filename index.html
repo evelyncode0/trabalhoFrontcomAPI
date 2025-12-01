@@ -1,52 +1,62 @@
 <!-- DEVE CONTER INFORMAÇÕES SOBRE UMA LOJA DE PRODUTOS DIVERSOS -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loja Diversificada</title>
 
     <!-- Estilos -->
     <link rel="stylesheet" href="./assets/css/style.css" />
-</head>
-<body>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="logo">Loja Diversificada</h1>
 
-    <header>
-        <h1>Loja Diversificada</h1>
-        <nav>
-            <a href="./products/products.html">Produtos</a>
-            <a href="./users/users.html">Usuários</a>
-        </nav>
+      <nav class="nav">
+        <a href="./products/products.html">Produtos</a>
+        <a href="./users/users.html">Usuários</a>
+
+        <button
+          class="theme-toggle toggle-btn" id="theme-toggle"
+          onclick="toggleTheme()"
+        >
+        </button>
+      </nav>
     </header>
 
     <main>
-        <section class="intro">
-            <h2>Bem-vindo à nossa loja!</h2>
-            <p>
-                Aqui você encontra uma grande variedade de produtos, desde eletrônicos até itens para o dia a dia.  
-                O objetivo desta loja é demonstrar o uso de APIs públicas para exibição de dados reais.
-            </p>
-        </section>
+      <section class="intro">
+        <h2>Bem-vindo à nossa loja!</h2>
+        <p>
+          Aqui você encontra uma grande variedade de produtos, desde eletrônicos
+          até itens para o dia a dia. O objetivo desta loja é demonstrar o uso
+          de APIs públicas para exibição de dados reais.
+        </p>
+      </section>
 
-        <section class="about">
-            <h3>Sobre o Projeto</h3>
-            <p>
-                Este site utiliza a API pública <strong>DummyJSON</strong> para listar produtos e usuários fictícios.
-                Desenvolvido com HTML, CSS e JavaScript.
-            </p>
-        </section>
+      <section class="about">
+        <h3>Sobre o Projeto</h3>
+        <p>
+          Este site utiliza a API pública <strong>DummyJSON</strong> para listar
+          produtos e usuários fictícios. Desenvolvido com HTML, CSS e
+          JavaScript.
+        </p>
+      </section>
 
-        <section class="cta">
-            <h3>Explore!</h3>
-            <button onclick="window.location.href='./products/products.html'">
-                Ver produtos
-            </button>
-        </section>
+      <section class="cta">
+        <h3>Explore!</h3>
+        <button onclick="window.location.href='./products/products.html'">
+          Ver produtos
+        </button>
+      </section>
     </main>
 
     <footer>
-        <p>Projeto Front-End — API DummyJSON — 2025</p>
+      <p>Projeto Front-End — API DummyJSON — 2025</p>
     </footer>
 
-</body>
+    <script src="./main.js"></script>
+
+  </body>
 </html>

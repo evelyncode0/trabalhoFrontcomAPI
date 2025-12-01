@@ -1,64 +1,85 @@
 const API_URL = "https://dummyjson.com/users";
 let users = [];
 
-// ===============================
-//  Busca inicial dos usuários
-// ===============================
+// =============================================
+// AVATAR GEOMÉTRICO PARA TODOS OS USUÁRIOS
+// =============================================
+function getAvatar(name) {
+    return `https://robohash.org/${encodeURIComponent(
+        name
+    )}.png?set=set5&size=150x150`;
+}
+
+// =============================================
+// CARREGAR USUÁRIOS (API → localStorage → tela)
+// =============================================
 async function loadUsers() {
     try {
         const storedUsers = localStorage.getItem("users");
+
         if (storedUsers) {
-            // Se houver usuario no localStorage, usa eles
+            // Se já existe no localStorage (depois do 1º carregamento)
             users = JSON.parse(storedUsers);
         } else {
-            // Caso contrário, busca na API
+            // Busca da API (EXATAMENTE COMO ERA NO COMEÇO)
             const response = await fetch(API_URL);
             const data = await response.json();
-            users = data.users;
+
+            // Converte TODOS os usuários para avatar geométrico
+            users = data.users.map(u => ({
+                firstName: u.firstName,
+                lastName: u.lastName,
+                email: u.email,
+                age: u.age,
+                image: getAvatar(u.firstName + u.lastName)
+            }));
+
+            // Salva no localStorage para manter estado
             localStorage.setItem("users", JSON.stringify(users));
         }
+
         renderUsers();
     } catch (error) {
         console.error("Erro ao carregar usuários:", error);
     }
 }
 
-// ===============================
-//  Renderizar usuários
-// ===============================
+// =============================================
+// RENDERIZAR CARDS
+// =============================================
 function renderUsers() {
     const container = document.getElementById("user-list");
     container.innerHTML = "";
 
     users.forEach((user, index) => {
         const card = document.createElement("div");
-        card.className = "card";
-
-        const image = user.image || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+        card.classList.add("card");
 
         card.innerHTML = `
-            <img src="${image}" alt="Foto de ${user.firstName}">
+            <img src="${user.image}" class="avatar-user" />
             <h3>${user.firstName} ${user.lastName}</h3>
-            <p><Email:</strong>  ${user.email}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
             <p><strong>Idade:</strong> ${user.age}</p>
 
-            <button class="remove-btn" onclick="removeUser(${index})">Remover</button>
+            <button class="remove-btn" onclick="removeUser(${index})">
+                Remover
+            </button>
         `;
 
         container.appendChild(card);
     });
 }
 
-// ===============================
-//  Remover usuário
-// ===============================
+// =============================================
+// REMOVER USUÁRIO
+// =============================================
 function removeUser(index) {
     users.splice(index, 1);
-     localStorage.setItem("users", JSON.stringify(users)); // Atualiza localStorage
+    localStorage.setItem("users", JSON.stringify(users));
     renderUsers();
 }
 
-// ===============================
+
 // validações
 
 function showError(inputId, message) {
@@ -78,18 +99,18 @@ function clearErrors() {
     });
 }
 
-// ===============================
-//  Adicionar usuário
-// ===============================
+// =============================================
+// ADICIONAR USUÁRIO MANUAL
+// (AVATAR GEOMÉTRICO AUTOMÁTICO)
+// =============================================
 document.getElementById("add-user-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    clearErrors();
 
-    const nome = document.getElementById("nome").value;
-    const sobrenome = document.getElementById("sobrenome").value;
-    const email = document.getElementById("email").value;
-    const idade= document.getElementById("idade").value;
-    const image = document.getElementById("image").value;
+    const nome = document.getElementById("nome").value.trim();
+    const sobrenome = document.getElementById("sobrenome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const idade = document.getElementById("idade").value.trim();
+    const image = document.getElementById("image").value.trim();
 
     let invalid = false;
 
@@ -101,21 +122,29 @@ document.getElementById("add-user-form").addEventListener("submit", (e) => {
 
     if (invalid) return;
 
-    // se estiver tudo OK na validação, cria usuario
+    // novo usuário
     const newUser = {
-        firstName:nome,
+        firstName: nome,
         lastName: sobrenome,
-        email: email,
+        email,
         age: idade,
-        image: image
+        image: image || getAvatar(nome + sobrenome)
     };
 
     users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users)); // Salva no localStorage
+    localStorage.setItem("users", JSON.stringify(users));
     renderUsers();
 
     e.target.reset();
 });
 
-// Carregar assim que a página abrir
+// Inicializa
 loadUsers();
+
+
+
+
+
+
+
+

@@ -1,4 +1,6 @@
-// Validações gerais
+// ===============================
+// Validações gerais (mantidas)
+// ===============================
 
 // texto obrigatório entre 3 e 50 caracteres
 function validateText(value) {
@@ -11,10 +13,9 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
-// número > 0 e < 120
-// idade e preço
+// número > 0 e < 120 (idade e preço limitado neste projeto)
 function validateNumber(num) {
-    return num > 0 && num < 120;
+    return typeof num === "number" && !isNaN(num) && num > 0 && num < 1000000;
 }
 
 // URL válida (opcional)
@@ -27,3 +28,65 @@ function validateURL(url) {
         return false;
     }
 }
+
+/* ===============================
+   Tema escuro/claro persistente
+   =============================== */
+
+/**
+ * Alterna o tema e salva a escolha no localStorage.
+ * Chamado por botões <button onclick="toggleTheme()">
+ */
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    try {
+        localStorage.setItem('site-theme-dark', isDark ? '1' : '0');
+    } catch (e) {
+        // ignore se storage não disponível
+    }
+    updateToggleButton();
+}
+
+/**
+ * Aplica o tema de acordo com localStorage (ou sistema).
+ * Deve ser chamado ao carregar a página.
+ */
+function applyThemeFromStorage() {
+    let isDark = null;
+    try {
+        const stored = localStorage.getItem('site-theme-dark');
+        if (stored !== null) isDark = stored === '1';
+    } catch (e) {
+        isDark = null;
+    }
+
+    // se não há preferência salva, podemos usar preferência do OS:
+    if (isDark === null) {
+        isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    if (isDark) document.body.classList.add('dark-mode');
+    else document.body.classList.remove('dark-mode');
+
+    updateToggleButton();
+}
+
+/**
+ * Atualiza texto/ícone do botão de toggle (se existir).
+ */
+function updateToggleButton() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    if (document.body.classList.contains('dark-mode')) {
+        btn.textContent = '☀️ Alternar Tema';
+    } else {
+        btn.textContent = '🌙 Alternar Tema';
+    }
+}
+
+/* Inicializar tema ao carregar o script */
+document.addEventListener('DOMContentLoaded', () => {
+    applyThemeFromStorage();
+});
+

@@ -1,6 +1,3 @@
-<!-- CADA PRODUTO POSSUI: TITULO, DESCRIÇÃO, PREÇO, MARCA, CATEGORIA E FOTOS -->
-<!-- A PAGINA DEVE LISTAR OS PRODUTOS E PERMITIR ADICIONAR E REMOVER -->
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -16,6 +13,11 @@
       <nav>
         <a href="../index.html">Início</a>
         <a href="../users/users.html">Usuários</a>
+
+        <!-- Botão alternar tema (usa função toggleTheme no main.js) -->
+        <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle">
+          🌙 Alternar Tema
+        </button>
       </nav>
     </header>
 
@@ -88,7 +90,8 @@
       <p>Projeto Front-End — API DummyJSON</p>
     </footer>
 
-    <script src="/main.js"></script>
+    <!-- Scripts: main.js (validações + tema) e products.js (lógica de produtos) -->
+    <script src="../main.js"></script>
     <script src="products.js"></script>
   </body>
 </html>

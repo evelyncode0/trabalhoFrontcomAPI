@@ -1,5 +1,3 @@
-<!-- CADA USUARIO POSSUI: NOME, SOBRENOME, EMAIL, IDADE E FOTO -->
-<!-- A PAGINA DEVE LISTAR OS USUARIOS E PERMITIR ADICIONAR E REMOVER -->
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -15,6 +13,10 @@
       <nav>
         <a href="../index.html">Início</a>
         <a href="../products/products.html">Produtos</a>
+
+        <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle">
+          🌙 Alternar Tema
+        </button>
       </nav>
     </header>
 
@@ -22,50 +24,65 @@
       <section>
         <h2>Adicionar Usuário</h2>
 
-        <div class="form-container-users">
+        <div class="form-container">
           <form id="add-user-form">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input
+                placeholder="Digite o nome"
+                type="text"
+                id="nome"
+                required
+              />
+              <span class="error-msg" id="err-nome"></span>
+            </div>
 
-            <div class="form-user">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" placeholder="Digite o nome" required />
-                <span class="error-msg" id="err-nome"></span>
+            <div class="form-group">
+              <label for="sobrenome">Sobrenome</label>
+              <input
+                placeholder="Digite o sobrenome"
+                type="text"
+                id="sobrenome"
+                required
+              />
+              <span class="error-msg" id="err-sobrenome"></span>
             </div>
-            
 
-            <div class="form-user">
-                <label for="sobrenome">Sobrenome</label>
-                <input type="text" id="sobrenome" placeholder="Digite o sobrenome" required />
-                <span class="error-msg" id="err-sobrenome"></span>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input
+                placeholder="Digite o email"
+                type="email"
+                id="email"
+                required
+              />
+              <span class="error-msg" id="err-email"></span>
             </div>
-           
 
-            <div class="form-user">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Digite o email" required />
-                <span class="error-msg" id="err-email"></span>
+            <div class="form-group">
+              <label for="idade">Idade</label>
+              <input
+                placeholder="Digite a idade"
+                type="number"
+                id="idade"
+                required
+              />
+              <span class="error-msg" id="err-idade"></span>
             </div>
-            
 
-            <div class="form-user">
-                <label>Idade</label>
-                <input type="number" id="idade" placeholder="Digite a idade" required />
-                <span class="error-msg" id="err-idade"></span>
+            <div class="form-group">
+              <label for="image">URL da imagem (opcional)</label>
+              <input placeholder="Cole aqui a URL" type="text" id="image"/>
+              <span class="error-msg" id="err-image"></span>
             </div>
-           
-            <div class="form-user">
-                <label>URL para imagem (opcional)</label>
-                <input type="text" id="image" placeholder="Digite uma URL válida"/>
-                <span class="error-msg" id="err-image"></span>
-            </div>
-            
+
             <button type="submit">Adicionar</button>
-            
           </form>
         </div>
       </section>
 
       <section>
-        <h2>Usuários Cadastrados</h2>
+        <h2>Usuários cadastrados</h2>
         <div id="user-list" class="cards"></div>
       </section>
     </main>
@@ -74,7 +91,7 @@
       <p>Projeto Front-End — API DummyJSON</p>
     </footer>
 
-    <script src="/main.js"></script>
+    <script src="../main.js"></script>
     <script src="users.js"></script>
   </body>
 </html>
